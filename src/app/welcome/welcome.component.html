@@ -1,0 +1,77 @@
+<div class="page">
+  <div class="left">
+    <img [src]="leftImageUrl" alt="Left panel image" />
+  </div>
+
+  <div class="right" [class.lang-open]="langModalOpen">
+    <button
+      #langButton
+      class="lang"
+      type="button"
+      aria-label="Select language"
+      aria-haspopup="dialog"
+      (click)="toggleLangModal()"
+    >
+      文A
+    </button>
+    <div
+      #langModal
+      class="lang-modal"
+      [class.open]="langModalOpen"
+      role="dialog"
+      aria-label="Select language"
+      (click)="closeLangModal()"
+    >
+      <div class="lang-panel" (click)="$event.stopPropagation()">
+        <div
+          class="lang-item"
+          *ngFor="let lang of languages; trackBy: trackByLang"
+          [class.active]="lang.code === selectedLang"
+          (click)="selectLanguage(lang.code)"
+          [attr.data-lang]="lang.code"
+        >
+          <span class="lang-flag">{{ lang.flag }}</span>
+          {{ lang.label }}
+        </div>
+      </div>
+    </div>
+
+    <div class="center">
+      <div class="logo">
+        <img [src]="logoUrl" alt="CALMS logo" />
+      </div>
+
+      <div class="title">{{ t.title }}</div>
+      <div class="subtitle">{{ t.subtitle }}</div>
+
+      <div class="form">
+        <div class="label">{{ t.select_branch }}</div>
+        <div #dropdown class="select-wrap" [class.open]="dropdownOpen">
+          <button
+            class="select-btn"
+            type="button"
+            aria-haspopup="listbox"
+            [attr.aria-expanded]="dropdownOpen"
+            (click)="toggleDropdown()"
+          >
+            <span class="select-value">
+              {{ selectedBranch || t.choose_branch }}
+            </span>
+            <span class="chev" aria-hidden="true">⌄</span>
+          </button>
+          <ul class="select-list" role="listbox" aria-label="Select Branch">
+            <li
+              class="select-item"
+              *ngFor="let branch of branches; trackBy: trackByValue"
+              [class.active]="branch === selectedBranch"
+              (click)="selectBranch(branch)"
+              role="option"
+            >
+              {{ branch }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
