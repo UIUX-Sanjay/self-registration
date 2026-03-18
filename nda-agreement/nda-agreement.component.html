@@ -1,0 +1,68 @@
+<main class="page" [formGroup]="form">
+  <header class="page-header">
+    <img [src]="logoUrl" alt="Calms Technologies" class="logo" />
+    <h1>Calms Technologies</h1>
+  </header>
+
+  <section class="content">
+    <div class="left">
+      <h2>
+        <span class="accent">NDA</span>
+        <span>Agreement</span>
+      </h2>
+      <p>Please enter the current date and sign below to complete the agreement.</p>
+      <div class="illustration">
+        <img [src]="illustrationUrl" alt="NDA illustration" />
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="right">
+      <div class="card">
+       
+        <div class="terms">
+          <div class="terms-title">Terms and Condition</div>
+          <textarea class="terms-box" formControlName="terms" readonly></textarea>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn grey" type="button">
+          <span class="icon-left">‹</span> Back
+        </button>
+        <button class="btn yellow" type="button" (click)="openSignature()">
+          Sign <span class="icon-right">✍</span>
+        </button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="modal" [class.active]="showSignatureModal">
+  <div class="modal-overlay" (click)="closeSignature()"></div>
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <div class="modal-header">
+      <div class="modal-title">Signature</div>
+      <button class="modal-close" type="button" (click)="closeSignature()">×</button>
+    </div>
+    <div class="signature-box">
+      <canvas
+        #signatureCanvas
+        class="signature-canvas"
+        (mousedown)="startDraw($event)"
+        (mousemove)="draw($event)"
+        (mouseup)="endDraw()"
+        (mouseleave)="endDraw()"
+        (touchstart)="startDraw($event)"
+        (touchmove)="draw($event)"
+        (touchend)="endDraw()"
+      ></canvas>
+    </div>
+    <div class="signature-label">Draw Signature Below</div>
+    <div class="modal-actions">
+      <button class="btn grey" type="button" (click)="closeSignature()">Close</button>
+      <button class="btn yellow" type="button" (click)="submitSignature()">submit</button>
+    </div>
+  </div>
+</div>

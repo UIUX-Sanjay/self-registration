@@ -1,0 +1,133 @@
+<div class="page">
+  <div class="success-icon">
+    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path fill-rule="evenodd" d="M12 2c-.791 0-1.55.314-2.11.874l-.893.893a.985.985 0 0 1-.696.288H7.04A2.984 2.984 0 0 0 4.055 7.04v1.262a.986.986 0 0 1-.288.696l-.893.893a2.984 2.984 0 0 0 0 4.22l.893.893a.985.985 0 0 1 .288.696v1.262a2.984 2.984 0 0 0 2.984 2.984h1.262c.261 0 .512.104.696.288l.893.893a2.984 2.984 0 0 0 4.22 0l.893-.893a.985.985 0 0 1 .696-.288h1.262a2.984 2.984 0 0 0 2.984-2.984V15.7c0-.261.104-.512.288-.696l.893-.893a2.984 2.984 0 0 0 0-4.22l-.893-.893a.985.985 0 0 1-.288-.696V7.04a2.984 2.984 0 0 0-2.984-2.984h-1.262a.985.985 0 0 1-.696-.288l-.893-.893A2.984 2.984 0 0 0 12 2Zm3.683 7.73a1 1 0 1 0-1.414-1.413l-4.253 4.253-1.277-1.277a1 1 0 0 0-1.415 1.414l1.985 1.984a1 1 0 0 0 1.414 0l4.96-4.96Z" clip-rule="evenodd"/>
+    </svg>
+  </div>
+
+  <h1 class="title">Successfully Approved</h1>
+  <p class="subtitle">Your visitor pass has been successfully approved.</p>
+
+  <div class="pass-card">
+    <div class="pass-header">
+      <div class="pass-brand">
+        <div class="brand-name">CALMS Technologies</div>
+        <div class="brand-sub">Visitor Access Pass</div>
+      </div>
+      <span class="badge">APPROVED</span>
+      <div class="reg-block">
+        <div class="reg-label">REGISTRATION ID</div>
+        <div class="reg-value">{{ registrationId }}</div>
+      </div>
+      <div class="wave"></div>
+    </div>
+
+    <div class="pass-body">
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 12a4 4 0 1 0-4-4a4 4 0 0 0 4 4Zm0 2c-3.3 0-6 1.7-6 3.8V20h12v-2.2c0-2.1-2.7-3.8-6-3.8Z"/>
+            </svg>
+          </span>
+          <div>
+            <div class="info-label">Visitor Name</div>
+            <div class="info-value">{{ visitorName }}</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7.6 8.4L4 12l3.6 3.6a3 3 0 0 0 4.2 0l1.2-1.2a2 2 0 0 1 2.8 0l1.6 1.6a3 3 0 0 0 4.2-4.2l-5-5a3 3 0 0 0-4.2 0l-1.1 1.1a2 2 0 0 1-2.8 0Z"/>
+            </svg>
+          </span>
+          <div>
+            <div class="info-label">Meeting With</div>
+            <div class="info-value">{{ meetingWith }}</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V2Zm13 8H4v10h16V10Zm0-2V6H4v2h16Z"/>
+            </svg>
+          </span>
+          <div>
+            <div class="info-label">Visit Date</div>
+            <div class="info-value">{{ visitDate }}</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2a7 7 0 0 1 7 7c0 5.2-7 13-7 13S5 14.2 5 9a7 7 0 0 1 7-7Zm0 4a3 3 0 1 0 0 6a3 3 0 0 0 0-6Z"/>
+            </svg>
+          </span>
+          <div>
+            <div class="info-label">Branch</div>
+            <div class="info-value">{{ branch }}</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 5v5.2l3.4 2a1 1 0 1 1-1 1.7L11 13V7a1 1 0 0 1 2 0Z"/>
+            </svg>
+          </span>
+          <div>
+            <div class="info-label">Time</div>
+            <div class="info-value">{{ time }}</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9.5 13.8l-2.3-2.3a1 1 0 0 0-1.4 1.4l3 3a1 1 0 0 0 1.4 0l6-6a1 1 0 1 0-1.4-1.4l-5.3 5.3Z"/>
+            </svg>
+          </span>
+          <div>
+            <div class="info-label">Status</div>
+            <div class="info-value status-pill">{{ status }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="qr-section">
+        <div class="qr-box">
+          <img [src]="qrUrl" alt="QR Code" />
+        </div>
+        <div class="qr-caption">Present this QR code at the security desk</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="action-buttons">
+    <button class="action-btn grey" type="button" (click)="downloadPdf()">
+      <span class="btn-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3v10l3.5-3.5a1 1 0 1 1 1.4 1.4l-5.2 5.2a1 1 0 0 1-1.4 0L5.1 10.9a1 1 0 0 1 1.4-1.4L10 13V3a1 1 0 0 1 2 0Zm-7 14h14v4H5v-4Z"/>
+        </svg>
+      </span>
+      Download PDF
+    </button>
+    <button class="action-btn grey" type="button" (click)="shareWhatsApp()">
+      <span class="btn-icon">
+        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+  <path d="M17.5 3a3.5 3.5 0 0 0-3.456 4.06L8.143 9.704a3.5 3.5 0 1 0-.01 4.6l5.91 2.65a3.5 3.5 0 1 0 .863-1.805l-5.94-2.662a3.53 3.53 0 0 0 .002-.961l5.948-2.667A3.5 3.5 0 1 0 17.5 3Z"/>
+</svg>
+
+      </span>
+      Share via WhatsApp
+    </button>
+    <button class="action-btn green" type="button" (click)="newRegistration()">
+      <span class="btn-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M11 5a1 1 0 0 1 2 0v6h6a1 1 0 1 1 0 2h-6v6a1 1 0 1 1-2 0v-6H5a1 1 0 1 1 0-2h6V5Z"/>
+        </svg>
+      </span>
+      New Registration
+    </button>
+  </div>
+</div>
