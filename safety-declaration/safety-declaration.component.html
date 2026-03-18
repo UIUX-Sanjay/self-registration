@@ -1,0 +1,88 @@
+<main class="page" [formGroup]="form">
+  <header class="page-header">
+    <img [src]="logoUrl" alt="Calms Technologies" class="logo" />
+    <h1>Calms Technologies</h1>
+  </header>
+
+  <section class="content">
+    <div class="left">
+      <h2>
+        <span class="accent">Safety Briefing</span>
+        <span>Declaration</span>
+      </h2>
+      <p>
+        Please answer the following health declaration questions before proceeding to final confirmation.
+      </p>
+      <div class="illustration">
+        <img [src]="illustrationUrl" alt="Safety declaration illustration" />
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="right">
+      <div class="questions" #questionsScroll>
+        <div class="question-card" *ngFor="let q of questions; let i = index">
+          <p class="question-text">{{ q.text }}</p>
+          <div class="options">
+            <button
+              type="button"
+              class="option"
+              *ngFor="let opt of options"
+              [ngClass]="{ selected: q.answer === opt }"
+              (click)="selectOption(i, opt)"
+            >
+              {{ opt }}
+            </button>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn grey" type="button">
+            <span class="icon-left">←</span> Back
+          </button>
+          <button class="btn yellow" type="button" [disabled]="!hasAnyAnswer" (click)="handleContinue()">
+            Continue <span class="icon-right">→</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="modal" [class.active]="modalType === 'incorrect'">
+  <div class="modal-overlay" (click)="closeModal()"></div>
+  <div class="modal-card compact" role="dialog" aria-modal="true">
+    <div class="modal-icon">
+     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  class="bi bi-person-video2" viewBox="0 0 16 16">
+  <path d="M10 9.05a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+  <path d="M2 1a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zM1 3a1 1 0 0 1 1-1h2v2H1zm4 10V2h9a1 1 0 0 1 1 1v9c0 .285-.12.543-.31.725C14.15 11.494 12.822 10 10 10c-3.037 0-4.345 1.73-4.798 3zm-4-2h3v2H2a1 1 0 0 1-1-1zm3-1H1V8h3zm0-3H1V5h3z"/>
+</svg>
+    </div>
+    <p class="modal-text compact">
+      Your answer to the safety briefing question is incorrect. Please rewatch the safety briefing video and try again.
+    </p>
+    <div class="modal-actions compact">
+      <button class="modal-btn danger" type="button" (click)="rewatchSafetyBrief()">Yes, Rewatch</button>
+      <button class="modal-link" type="button" (click)="reviewAnswers()">Review My Answer</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" [class.active]="modalType === 'required'">
+  <div class="modal-overlay" (click)="closeModal()"></div>
+  <div class="modal-card compact" role="dialog" aria-modal="true">
+    <div class="modal-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-toggle-on" viewBox="0 0 16 16">
+  <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8"/>
+</svg>
+    </div>
+    <p class="modal-text compact">
+      Please answer all required questions before proceeding.
+    </p>
+    <div class="modal-actions compact">
+      <button class="modal-btn danger" type="button" (click)="reviewAnswers()">Review My Answer</button>
+      <button class="modal-link" type="button" (click)="closeModal()">Keep Answering</button>
+    </div>
+  </div>
+</div>
