@@ -1,0 +1,405 @@
+<main class="page">
+  <div class="toast-container" aria-live="polite">
+    <div
+      class="toast card"
+      *ngFor="let toast of toasts"
+      [class.success]="toast.type === 'success'"
+      [class.error]="toast.type === 'error'"
+    >
+      <span class="toast-icon">
+        <svg viewBox="0 0 20 20" aria-hidden="true">
+          <path
+            *ngIf="toast.type === 'error'"
+            d="M10 2a8 8 0 1 0 0 16a8 8 0 0 0 0-16Zm0 4h0a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V7a1 1 0 0 1 1-1Zm0 8a1.2 1.2 0 1 1 0-2.4a1.2 1.2 0 0 1 0 2.4Z"
+          />
+          <path
+            *ngIf="toast.type === 'success'"
+            d="M9.5 13.8l-2.3-2.3a1 1 0 0 0-1.4 1.4l3 3a1 1 0 0 0 1.4 0l6-6a1 1 0 1 0-1.4-1.4l-5.3 5.3Z"
+          />
+        </svg>
+      </span>
+      <span class="toast-text">
+        {{ toast.message }}
+        <small>{{ toast.type === 'error' ? 'Please try again later.' : 'Saved successfully.' }}</small>
+      </span>
+      <button class="toast-close" type="button" (click)="closeToast(toast.id)" aria-label="Close">×</button>
+    </div>
+  </div>
+
+  <header class="page-header">
+    <div class="logo-block">
+      <img [src]="logoUrl" alt="Calms Technologies" class="logo" />
+    </div>
+    <h1 class="brand-title">Calms Technologies</h1>
+  </header>
+
+  <section class="top-section">
+    <div class="left-title">
+      <h2 class="hero-title">
+        <span class="hero-title-accent">Visitor</span>
+        <span class="hero-title-main">Information</span>
+      </h2>
+      <p class="hero-subtext">
+        Please provide your details Provide accurate details for screening and access clearance. All fields are required.
+      </p>
+    </div>
+    <button class="btn btn-outline" type="button" (click)="openModal('search')">
+      <span class="btn-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M10.5 3a7.5 7.5 0 1 1 0 15a7.5 7.5 0 0 1 0-15Zm0 2a5.5 5.5 0 1 0 0 11a5.5 5.5 0 0 0 0-11Zm7.7 12.3l3.2 3.2a1 1 0 0 1-1.4 1.4l-3.2-3.2a1 1 0 0 1 1.4-1.4Z" />
+        </svg>
+      </span>
+      Returning visitor?
+    </button>
+  </section>
+
+  <form class="visitor-form" novalidate>
+    <div class="form-shell">
+      <div class="form-scroll">
+        <div class="form-grid">
+          <label class="field">
+            <span class="sr-only">Name</span>
+            <div class="input-wrap">
+              <span class="field-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 12a4 4 0 1 0-4-4a4 4 0 0 0 4 4Zm0 2c-3.3 0-6 1.7-6 3.8V20h12v-2.2c0-2.1-2.7-3.8-6-3.8Z" />
+                </svg>
+              </span>
+              <input type="text" name="name" placeholder="Name" [(ngModel)]="formData.name" required />
+            </div>
+          </label>
+
+          <label class="field">
+            <span class="sr-only">Phone</span>
+            <div class="input-wrap">
+              <span class="field-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6.6 3.5h3.1a1 1 0 0 1 1 .8l.6 3.1a1 1 0 0 1-.6 1.1l-1.6.7a11.6 11.6 0 0 0 5.1 5.1l.7-1.6a1 1 0 0 1 1.1-.6l3.1.6a1 1 0 0 1 .8 1v3.1a1 1 0 0 1-1 1C10.1 19.8 4.2 13.9 3.9 4.5a1 1 0 0 1 1-1Z" />
+                </svg>
+              </span>
+              <input type="tel" name="phone" placeholder="Phone" [(ngModel)]="formData.phone" required />
+            </div>
+          </label>
+
+          <label class="field">
+            <span class="sr-only">Gender</span>
+            <div class="input-wrap">
+              <span class="field-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M16.5 2H22v5.5h-2V5.4l-3.2 3.2a6 6 0 1 1-1.4-1.4L18.6 4H16.5V2ZM8.5 10a4 4 0 1 0 0 8a4 4 0 0 0 0-8Z" />
+                </svg>
+              </span>
+              <select name="gender" [(ngModel)]="formData.gender" required>
+                <option value="" disabled>Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </label>
+
+          <label class="field">
+            <span class="sr-only">Who to visit</span>
+            <div class="input-wrap">
+              <span class="field-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 12a4 4 0 1 0-4-4a4 4 0 0 0 4 4Zm0 2c-3.3 0-6 1.7-6 3.8V20h12v-2.2c0-2.1-2.7-3.8-6-3.8Z" />
+                </svg>
+              </span>
+              <input type="text" name="visit" placeholder="who to vist" [(ngModel)]="formData.visit" required />
+            </div>
+          </label>
+
+          <label class="field">
+            <span class="sr-only">Email</span>
+            <div class="input-wrap">
+              <span class="field-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Zm0 2v.4l8 5 8-5V8H4Zm16 8v-5.4l-7.5 4.7a1 1 0 0 1-1 0L4 10.6V16h16Z" />
+                </svg>
+              </span>
+              <input type="email" name="email" placeholder="email" [(ngModel)]="formData.email" required />
+            </div>
+          </label>
+
+          <label class="field">
+            <div class="input-wrap">
+              <span class="field-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3V2Zm13 8H4v10h16V10Zm0-2V6H4v2h16Z" />
+                </svg>
+              </span>
+              <input
+                type="text"
+                name="visitDate"
+                placeholder="Put date"
+                readonly
+                (click)="openModal('date')"
+                (focus)="openModal('date')"
+                [(ngModel)]="formData.visitDate"
+                required
+              />
+            </div>
+          </label>
+
+          <label class="field">
+            <span class="field-label">Visit Time</span>
+            <div class="input-wrap">
+              <span class="field-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 5v5.2l3.4 2a1 1 0 1 1-1 1.7L11 13V7a1 1 0 0 1 2 0Z" />
+                </svg>
+              </span>
+              <input
+                type="text"
+                name="visitTime"
+                placeholder="Put time"
+                readonly
+                (click)="openModal('time')"
+                (focus)="openModal('time')"
+                [(ngModel)]="formData.visitTime"
+                required
+              />
+            </div>
+          </label>
+
+          <label class="field">
+            <span class="field-label">Identity Number</span>
+            <div class="input-wrap">
+              <span class="field-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 4h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 2v12h10V6H7Zm2 2h6v2H9V8Zm0 4h6v2H9v-2Z" />
+                </svg>
+              </span>
+              <input type="text" name="identity" [(ngModel)]="formData.identity" required />
+            </div>
+          </label>
+
+          <label class="field">
+            <span class="field-label">Single AUDF2</span>
+            <div class="input-wrap">
+              <span class="field-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 4h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 2v12h10V6H7Zm2 2h2v2H9V8Zm0 4h2v2H9v-2Zm4-4h2v2h-2V8Zm0 4h2v2h-2v-2Z" />
+                </svg>
+              </span>
+              <input type="text" name="singleAudf2" [(ngModel)]="formData.singleAudf2" required />
+            </div>
+          </label>
+
+          <label class="field">
+            <span class="field-label">ID Type (Calms)</span>
+            <div class="input-wrap">
+              <span class="field-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Zm0 2v8h16V8H4Zm2 2h5v2H6v-2Zm0 3h7v2H6v-2Z" />
+                </svg>
+              </span>
+              <input type="text" name="idType" [(ngModel)]="formData.idType" required />
+            </div>
+          </label>
+
+          <label class="field">
+            <span class="field-label">Multiple AUDF3</span>
+            <div class="input-wrap">
+              <span class="field-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 4h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 2v12h10V6H7Zm2 2h2v2H9V8Zm0 4h2v2H9v-2Zm4-4h2v2h-2V8Zm0 4h2v2h-2v-2Z" />
+                </svg>
+              </span>
+              <input type="text" name="multipleAudf3" [(ngModel)]="formData.multipleAudf3" required />
+            </div>
+          </label>
+
+          <label class="field">
+            <span class="field-label">Freetext AUDF1</span>
+            <div class="input-wrap">
+              <span class="field-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Zm2 4h12v2H6v-2Zm0 4h8v2H6v-2Z" />
+                </svg>
+              </span>
+              <input type="text" name="freetextAudf1" [(ngModel)]="formData.freetextAudf1" required />
+            </div>
+          </label>
+        </div>
+
+        <section class="saved-visitors" aria-live="polite">
+          <div class="saved-card" *ngFor="let visitor of visitors; let i = index">
+            <div>
+              <h4>Save Visitor</h4>
+              <div class="saved-row">
+                <div class="saved-item">
+                  <span class="icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 12a4 4 0 1 0-4-4a4 4 0 0 0 4 4Zm0 2c-3.3 0-6 1.7-6 3.8V20h12v-2.2c0-2.1-2.7-3.8-6-3.8Z" />
+                    </svg>
+                  </span>
+                  <span>{{ visitor.name }}</span>
+                </div>
+                <div class="saved-item">
+                  <span class="icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M6.6 3.5h3.1a1 1 0 0 1 1 .8l.6 3.1a1 1 0 0 1-.6 1.1l-1.6.7a11.6 11.6 0 0 0 5.1 5.1l.7-1.6a1 1 0 0 1 1.1-.6l3.1.6a1 1 0 0 1 .8 1v3.1a1 1 0 0 1-1 1C10.1 19.8 4.2 13.9 3.9 4.5a1 1 0 0 1 1-1Z" />
+                    </svg>
+                  </span>
+                  <span>{{ visitor.phone }}</span>
+                </div>
+              </div>
+            </div>
+            <button class="delete-btn" type="button" (click)="deleteVisitor(i)" aria-label="Delete">
+             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+  <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
+</svg>
+
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-back" type="button">
+          <span class="btn-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 11H7.8l4.6-4.6a1 1 0 1 0-1.4-1.4l-6.3 6.3a1 1 0 0 0 0 1.4l6.3 6.3a1 1 0 1 0 1.4-1.4L7.8 13H20a1 1 0 1 0 0-2Z" />
+            </svg>
+          </span>
+          Back
+        </button>
+
+        <div class="action-right">
+          <button class="btn btn-primary" type="button" [disabled]="!anyFilled" (click)="saveAdd()">
+            Save and Add
+            <span class="btn-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 4h10l4 4v4h-2V9h-3a1 1 0 0 1-1-1V5H6v14h8v2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm13 9v-2h2v2h2v2h-2v2h-2v-2h-2v-2h2Z" />
+              </svg>
+            </span>
+          </button>
+          <button class="btn btn-primary" type="button" [disabled]="!anyFilled" (click)="saveContinue()">
+            Save and Continue
+            <span class="btn-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 4h10l4 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm9 2H6v14h12V9h-3a1 1 0 0 1-1-1V6Zm-5 5a1 1 0 0 1 2 0v5h-2v-5Zm0-3h2v2h-2V8Z" />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</main>
+
+<div class="modal" [class.active]="searchModalOpen" aria-hidden="!searchModalOpen">
+  <div class="modal-overlay" (click)="closeModal()"></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" type="button" (click)="closeModal()" aria-label="Close">×</button>
+    <h3 id="modalTitle">Search Profile</h3>
+    <p>Enter your Phone Number, Email, or NRIC to find your existing profile and skip the form.</p>
+    <label class="field modal-field">
+      <span class="sr-only">Search</span>
+      <div class="input-wrap">
+        <span class="field-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M10.5 3a7.5 7.5 0 1 1 0 15a7.5 7.5 0 0 1 0-15Zm0 2a5.5 5.5 0 1 0 0 11a5.5 5.5 0 0 0 0-11Zm7.7 12.3l3.2 3.2a1 1 0 0 1-1.4 1.4l-3.2-3.2a1 1 0 0 1 1.4-1.4Z" />
+          </svg>
+        </span>
+        <input type="text" placeholder="Search" />
+      </div>
+    </label>
+    <button class="btn btn-primary btn-block" type="button">Search Profile</button>
+  </div>
+</div>
+
+<div class="modal" [class.active]="dateModalOpen" aria-hidden="!dateModalOpen">
+  <div class="modal-overlay" (click)="closeModal()"></div>
+  <div class="modal-card date-card" role="dialog" aria-modal="true" aria-labelledby="dateTitle">
+    <button class="modal-close" type="button" (click)="closeModal()" aria-label="Close">×</button>
+    <div class="date-header">
+      <button class="nav-btn" type="button" (click)="previousMonth()">‹</button>
+      <h3 id="dateTitle">{{ dateTitle }}</h3>
+      <button class="nav-btn" type="button" (click)="nextMonth()">›</button>
+    </div>
+    <div class="weekday-row">
+      <span *ngFor="let day of weekdays">{{ day }}</span>
+    </div>
+    <div class="calendar-grid">
+      <button
+        type="button"
+        *ngFor="let day of calendarDays"
+        [disabled]="!day.date"
+        [class.is-selected]="day.isSelected"
+        (click)="day.date && selectDate(day.date)"
+      >
+        {{ day.label }}
+      </button>
+    </div>
+    <div class="date-actions">
+      <button class="btn btn-back btn-light" type="button" (click)="closeModal()">Cancel</button>
+      <button class="btn btn-primary btn-light" type="button" (click)="applyDate()">Apply</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" [class.active]="timeModalOpen" aria-hidden="!timeModalOpen">
+  <div class="modal-overlay" (click)="closeModal()"></div>
+  <div class="modal-card time-card" role="dialog" aria-modal="true" aria-labelledby="timeTitle">
+    <button class="modal-close" type="button" (click)="closeModal()" aria-label="Close">×</button>
+    <h3 id="timeTitle">Select Time</h3>
+    <div class="time-grid">
+      <button
+        type="button"
+        *ngFor="let time of timeSlots"
+        [class.is-selected]="time === selectedTime"
+        (click)="selectTime(time)"
+      >
+        {{ time }}
+      </button>
+    </div>
+    <div class="date-actions">
+      <button class="btn btn-back btn-light" type="button" (click)="closeModal()">Cancel</button>
+      <button class="btn btn-primary btn-light" type="button" (click)="applyTime()">Apply</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" [class.active]="photoModalOpen" aria-hidden="!photoModalOpen">
+  <div class="modal-overlay" (click)="closeModal()"></div>
+  <div class="modal-card photo-card" role="dialog" aria-modal="true" aria-labelledby="photoTitle">
+    <button class="modal-close" type="button" (click)="closeModal()" aria-label="Close">×</button>
+    <h3 id="photoTitle">Capture Your Photo</h3>
+    <p>Align your face inside the frame</p>
+    <div class="photo-frame" [class.photo-state-captured]="photoCaptured">
+      <div class="photo-actions">
+        <button type="button" aria-label="Disable camera">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 4l16 16-1.4 1.4L3 5.4 4 4Zm3.4 2.6h5.1l2-2h3.5a2 2 0 0 1 2 2v8.5l-2-2V8.6h-2.6l-2-2H9.4l-2 2H6.1l-1.7-1.7Zm9.2 12.8H6.1a2 2 0 0 1-2-2v-8l2 2v6.1h8.5l2 2Z" />
+          </svg>
+        </button>
+        <button type="button" aria-label="Refresh camera">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 5a7 7 0 0 1 6.6 4.8h-2.1A5 5 0 1 0 17 12h2a7 7 0 1 1-7-7Zm7-1v5h-5l1.7-1.7A8.9 8.9 0 0 0 12 3a9 9 0 1 0 9 9h-2a7 7 0 1 1-7-7a7 7 0 0 1 4.1 1.4L19 4Z" />
+          </svg>
+        </button>
+      </div>
+      <div class="photo-ring">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 6h3l1-2h2l1 2h3a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Zm5 3a4 4 0 1 0 0 8a4 4 0 0 0 0-8Z" />
+        </svg>
+      </div>
+      <div class="photo-message" *ngIf="photoCaptured">Photo Captured!</div>
+    </div>
+    <div class="photo-note">Make sure your face is clearly visible</div>
+    <button class="btn btn-primary photo-btn" type="button" (click)="capturePhoto()" *ngIf="!photoCaptured">
+      Capture Photo
+    </button>
+    <button class="btn photo-btn secondary" type="button" *ngIf="!photoCaptured">
+      <svg viewBox="0 0 24 24" aria-hidden="true" width="16" height="16">
+        <path d="M12 3l4 4h-3v6h-2V7H8l4-4Zm-6 12h12v4H6v-4Z" />
+      </svg>
+      Upload from Device
+    </button>
+    <button class="btn photo-btn secondary" type="button" (click)="retakePhoto()" *ngIf="photoCaptured">Retake</button>
+    <button class="btn btn-primary photo-btn" type="button" (click)="usePhoto()" *ngIf="photoCaptured">Use This Photo</button>
+  </div>
+</div>
