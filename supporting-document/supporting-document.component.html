@@ -1,0 +1,94 @@
+<main class="page">
+  <header class="page-header">
+    <img [src]="logoUrl" alt="Calms Technologies" class="logo" />
+    <h1>Calms Technologies</h1>
+  </header>
+
+  <section class="content">
+    <div class="left">
+      <h2>
+        <span class="accent">Supporting</span>
+        <span>Documents</span>
+      </h2>
+      <p>Upload identification or supporting documents (Optional)</p>
+      <div class="illustration">
+        <img [src]="illustrationUrl" alt="Supporting documents illustration" />
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="right">
+      <div
+        class="card"
+        *ngFor="let card of cards"
+        [class.upload]="card.status === 'idle'"
+        [class.uploading]="card.status === 'uploading'"
+        [class.uploaded]="card.status === 'uploaded'"
+        (click)="card.status === 'idle' && triggerFile(fileInput)"
+      >
+        <div class="card-text">
+          <div class="title">{{ displayTitle(card) }}</div>
+          <div class="subtitle" *ngIf="card.status !== 'uploaded'">{{ card.subtitle }}</div>
+          <div class="subtitle" *ngIf="card.status === 'uploaded' && card.fileSize">({{ card.fileSize }})</div>
+          <div class="error" *ngIf="card.error">{{ card.error }}</div>
+          <div class="progress" *ngIf="card.status === 'uploading'">
+            <div class="track">
+              <div class="fill" [style.width.%]="card.progress"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-right" *ngIf="card.status === 'idle'">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 4h9l3 3v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm8 1v3h3" />
+              <path d="M12 17V9" />
+              <path d="M9 12l3-3l3 3" />
+            </svg>
+          </div>
+          <div class="small">No file chosen</div>
+        </div>
+
+        <div class="card-right percent" *ngIf="card.status === 'uploading'">
+          {{ card.progress }}%
+        </div>
+
+        <button
+          class="delete"
+          type="button"
+          *ngIf="card.status === 'uploaded'"
+          (click)="$event.stopPropagation(); resetCard(card)"
+          aria-label="Delete"
+        >
+       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+  <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+</svg>
+
+        </button>
+
+        <input
+          #fileInput
+          type="file"
+          accept="application/pdf"
+          hidden
+          (change)="handleFileUpload($event, card)"
+        />
+      </div>
+
+      <div class="actions">
+        <div class="actions-left">
+          <button class="btn grey" type="button">
+            <span class="icon-left">←</span> Back
+          </button>
+          <button class="btn grey" type="button">
+            Skip <span class="icon-right">→</span>
+          </button>
+        </div>
+        <button class="btn yellow" type="button">
+          Continue <span class="icon-right">→</span>
+        </button>
+      </div>
+    </div>
+  </section>
+</main>

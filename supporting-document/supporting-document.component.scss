@@ -1,0 +1,248 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+:host {
+  --primary: #f5b301;
+  --text-dark: #3c3c3c;
+  --text-muted: #6f7785;
+  --card-bg: #ffffff;
+  --shadow: 0 18px 30px rgba(0, 0, 0, 0.08);
+
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  background-color: #f5f5f5;
+  background-image: url("/assets/back.png");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 100% auto;
+  color: var(--text-dark);
+}
+
+:host,
+:host * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.page {
+  width: 100%;
+  max-width: 1440px;
+  padding: 24px 52px 8px;
+  max-height: 1000px;
+}
+
+.page-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.logo {
+  width: 170px;
+}
+
+.page-header h1 {
+  font-size: 34px;
+  font-weight: 600;
+  color: #5d5d5d;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-top: 80px;
+}
+
+.left h2 {
+  display: flex;
+  flex-direction: column;
+  font-size: 40px;
+  line-height: 1.1;
+  font-weight: 600;
+}
+
+.left .accent {
+  color: var(--primary);
+}
+
+.left p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #6b7280;
+}
+
+.illustration {
+  margin-top: 24px;
+  width: 100%;
+  max-width: 520px;
+}
+
+.illustration img,
+.illustration svg {
+  width: 100%;
+  height: auto;
+}
+
+.divider {
+  width: 1px;
+  background: #e0e5f1;
+  height: 100%;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 53px;
+  padding: 14px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+  border: 1px solid #e3e8f3;
+  position: relative;
+}
+
+.card .title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.card .subtitle {
+  font-size: 14px;
+  color: #7a8292;
+}
+
+.card .small {
+  font-size: 14px;
+  color: #6b6b6b;
+}
+
+.card .icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #f1f1f1;
+  margin-bottom: 6px;
+}
+
+.card .icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: #4a4a4a;
+  fill: none;
+  stroke-width: 1.7;
+}
+
+.card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.card.upload {
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card.upload:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.12);
+}
+
+.card.upload .error {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #d54b4b;
+}
+
+.card.uploading .progress {
+  margin-top: 10px;
+}
+
+.progress .track {
+  width: 320px;
+  height: 8px;
+  background: #e7e7e7;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress .fill {
+  height: 100%;
+  background: var(--primary);
+  width: 0;
+  transition: width 0.25s ease;
+}
+
+.card.uploading .percent {
+  font-size: 22px;
+  font-weight: 500;
+  color: #4a4a4a;
+}
+
+.card.uploaded .delete {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.card.uploaded .delete svg {
+  width: 22px;
+  height: 28px;
+  fill: #e23d3d;
+}
+
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 54px;
+}
+
+.actions-left {
+  display: flex;
+  gap: 18px;
+}
+
+.btn {
+  border: none;
+  padding: 13px 28px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.btn.grey {
+  background: #d9d9d9;
+  color: #4b4b4b;
+}
+
+.btn.yellow {
+  background: var(--primary);
+  color: #2b2b2b;
+}
+
+.icon-left,
+.icon-right {
+  font-size: 18px;
+}
