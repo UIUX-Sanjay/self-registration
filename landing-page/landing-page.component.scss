@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+
+:root{
+  --bg:#efe2d4;
+  --soft:#f4f7fb;
+  --text:#0f172a;
+  --muted:#64748b;
+  --primary:#2563eb;
+  --primary-dark:#1e40af;
+  --radius:18px;
+  --shadow:0 20px 60px rgba(15,23,42,0.08);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{overflow-x:hidden}
+:host{display:block;min-height:100vh;font-family:"Poppins",sans-serif;background:var(--bg);color:var(--text)}
+
+.container{width:100%;max-width:1320px;padding:0 16px;margin:auto}
+
+.section{padding:27px 0}
+
+.btn{padding:12px 24px;border-radius:30px;font-weight:600;cursor:pointer;transition:0.3s ease;border:none;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.btn-primary{background:linear-gradient(120deg,#2563eb,#3b82f6);color:#fff;box-shadow:0 12px 35px rgba(37,99,235,0.35)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(37,99,235,0.4)}
+.btn-glass{color:#fff;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.35);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 10px 28px rgba(0,0,0,0.24)}
+.btn-glass:hover{transform:translateY(-3px);background:rgba(255,255,255,0.24);box-shadow:0 14px 34px rgba(0,0,0,0.28)}
+.btn-light{background:#fff;color:#2563eb;padding:12px 26px;border-radius:30px}
+.btn-light:hover{background:#d0835f;color:#fff}
+
+.site-header{position:sticky;top:0;left:0;width:100%;background:#f1e3d6;z-index:1000;box-shadow:0 6px 18px rgba(60,40,30,0.25)}
+.nav-wrap{min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:0;margin:0}
+.site-header .container{padding:0;margin:0}
+.header-actions{    margin-right: -132px;}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;flex-shrink:0}
+.brand-mark{width:90px;height:48px;border-radius:8px;display:grid;place-items:center;overflow:hidden;    margin-left: 23px;}
+.brand-mark img{width:100%;height:100%;object-fit:contain;display:block}
+.nav-panel{display:flex;align-items:center;gap:22px;margin-left:auto}
+.header-actions{display:flex;align-items:center;gap:14px}
+.btn-header{    background: #d0835f;
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 28px;
+    box-shadow: 0 6px 16px rgba(208, 131, 95, 0.4);}
+.btn-header:hover{transform:translateY(-2px)}
+
+.hero{display:none}
+
+.section-title-center{text-align:center;margin-bottom:18px;font-size:26px}
+.section-note{text-align:center;margin-bottom:40px;color:#334155;line-height:1.6;font-size:15px}
+
+.nike-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;max-width:1120px;margin:0 auto}
+.nike-card{background:#fff;border-radius:24px;box-shadow:0 18px 40px rgba(0,0,0,0.06);overflow:hidden;transition:0.35s ease;display:flex;flex-direction:column;border:2px solid transparent;cursor:pointer;padding-bottom:6px}
+.nike-card:hover{transform:translateY(-6px);box-shadow:0 22px 55px rgba(0,0,0,0.10)}
+.nike-card.selected{border-color:#d0835f;box-shadow:0 22px 55px rgba(208,131,95,0.18)}
+.nike-image{position:relative;padding:10px}
+.nike-image img{width:100%;height:240px;object-fit:cover;border-radius:18px}
+.badge{position:absolute;top:26px;left:26px;background:rgba(255,255,255,0.85);backdrop-filter:blur(8px);padding:5px 12px;border-radius:999px;font-size:16px;font-weight:700}
+.dots{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
+.dots span{width:5px;height:5px;background:#fff;opacity:0.8;border-radius:50%}
+.nike-content{padding:8px 18px 10px;display:flex;flex-direction:column;flex-grow:1;min-height:100px}
+.nike-content h3{font-size:18px;margin-bottom:6px; font-weight: 600}
+.sub{color:#64748b;font-weight:500;margin-bottom:8px;font-size:14px}
+.desc{color:#94a3b8;font-size:13px;margin-bottom:8px;line-height:1.4;flex-grow:1;white-space:pre-line;min-height:42px}
+.card-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.card-actions{display:flex;justify-content:flex-end;margin-top:auto}
+.btn-select{background:#d0835f;color:#fff;padding:8px 20px;border-radius:18px;font-size:13px;box-shadow:0 6px 12px rgba(208,131,95,0.3)}
+.btn-select:hover{transform:translateY(-2px)}
+
+.booking-section{background:transparent;padding:28px 0}
+.booking-shell{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;max-width:1120px;margin:auto}
+.booking-right{display:flex;flex-direction:column}
+.booking-title{text-align: left;
+    margin-bottom: 10px;
+    font-size: 22px;
+    font-weight: 600;}
+.booking-note{text-align:left;margin-bottom:18px}
+.booking-layout{display:grid;grid-template-columns:1fr;gap:0;align-items:stretch;max-width:100%;margin:0}
+.calendar-card,.date-slider-card{background:#ffffff;padding:24px;border-radius:22px;box-shadow:0 20px 50px rgba(0,0,0,0.08);width:100%}
+.calendar-card{min-height:auto}
+.calendar-card.has-action{min-height:420px}
+.calendar-card{padding-bottom:14px}
+.calendar-card.has-action{padding-bottom:14px}
+.calendar-card{display:flex;flex-direction:column;justify-content:flex-start}
+.date-slider-card{display:none}
+.date-hero-card{position:relative;overflow:hidden;padding:0;min-height:373px;border-radius:22px;background:#f7efe5;box-shadow:0 20px 50px rgba(0,0,0,0.08)}
+.date-hero-card.has-action{min-height:420px}
+.date-hero-overlay{position:absolute;inset:0;background:url("/assets/date.jpg") center/90% auto no-repeat;opacity:0.15}
+.date-hero-content{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;color:#3f2a20;text-align:center}
+.date-hero-content h3{font-size:28px;font-weight:600}
+.date-slider-track{position:absolute;inset:0}
+.date-slide{position:absolute;inset:0;opacity:0;background-size:cover;background-position:center;animation:dateSlider 18s ease-in-out infinite}
+.date-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.12),rgba(0,0,0,0.58))}
+@keyframes dateSlider{0%{opacity:0;transform:scale(1.06)}8%{opacity:1;transform:scale(1.03)}30%{opacity:1;transform:scale(1)}38%{opacity:0;transform:scale(1.05)}100%{opacity:0;transform:scale(1.06)}}
+.date-slider-content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;padding:28px}
+.date-slider-content h3{font-size:28px;margin-bottom:10px}
+.date-slider-content p{max-width:90%;line-height:1.5;color:rgba(255,255,255,0.9)}
+.calendar-header{margin-bottom:18px}
+.calendar-header div{display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:18px}
+.calendar-header button{width:34px;height:34px;border-radius:10px;border:none;background:#f1f5f9;cursor:pointer;transition:0.3s ease}
+.calendar-header button:hover{background:#e2e8f0}
+.weekdays{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:13px;font-weight:500;color:#94a3b8;margin-bottom:10px}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-bottom:0}
+.day{height:42px;border-radius:12px;border:none;background:#f8fafc;cursor:pointer;font-weight:500;transition:0.25s ease}
+.day:hover{background:#e2e8f0}
+.day.selected{background:#ca925e;color:#fff;box-shadow:0 8px 20px rgba(37,99,235,0.35)}
+.day.disabled{opacity:0.35;pointer-events:none}
+.confirm-now-btn{width:100%;margin-top:auto;padding:14px 18px;border:none;border-radius:14px;background: linear-gradient(120deg, #d0835f, #dcaa7b);color:#fff;font-weight:600;cursor:pointer;box-shadow:0 12px 24px rgba(37,99,235,0.28);display:none}
+.confirm-now-btn.show{display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.confirm-now-btn:hover{transform:translateY(-2px)}
+.confirm-now-btn .btn-icon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px}
+.confirm-now-btn .btn-icon svg{width:18px;height:18px;fill:#fff}
+
+.premium-footer{display:none}
+
+
+@media (max-width: 992px){
+  .section{padding:72px 0}
+  .booking-shell{grid-template-columns:1fr;gap:24px}
+  .booking-layout{grid-template-columns:1fr;gap:24px}
+  .booking-title,.booking-note{text-align:center}
+  .calendar-card{max-width:100%;min-height:380px}
+  .date-hero-card{max-width:100%;min-height:280px}
+}
+
+@media (max-width: 768px){
+  .container{padding:0 16px;text-align:left}
+  .section{padding:18px 0}
+  .nav-wrap{min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .brand-mark{width:60px;height:63px;margin-top:12px}
+  .nav-panel{display:flex !important;width:auto;margin-left:auto;padding:0;gap:0}
+  .header-actions{width:auto;display:flex;margin-right: 15px}
+  .header-actions .btn{width:auto;padding:10px 14px;font-size:13px;justify-content:center;white-space:nowrap}
+  .section-note{font-size:14px;line-height:1.45;margin-bottom:24px}
+  .nike-grid{grid-template-columns:1fr}
+  .nike-image img{height:200px}
+  .calendar-card{padding:16px;border-radius:16px;min-height:auto}
+  .date-hero-card{display:none}
+  .calendar-grid{gap:6px}
+  .day{height:38px;font-size:13px}
+  .wa-float{width:56px;height:56px;right:16px;bottom:16px;font-size:24px}
+  .wa-contact-chip{right:80px;bottom:22px;padding:8px 12px;font-size:12px}
+}

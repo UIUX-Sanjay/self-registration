@@ -1,0 +1,88 @@
+<header class="site-header">
+  <div class="container nav-wrap">
+    <div class="brand">
+      <div class="brand-mark">
+        <img src="/assets/pod.png" alt="POD PILATES" width="140" height="48" loading="eager" decoding="async" />
+      </div>
+    </div>
+    <div class="nav-panel">
+      <div class="header-actions">
+        <button class="btn btn-header" type="button" (click)="scrollToBooking()">Book Now</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="locations">
+  <div class="container">
+    
+
+    <div class="nike-grid">
+      <div class="nike-card" *ngFor="let outlet of outlets" [class.selected]="isSelectedOutlet(outlet)" (click)="selectOutlet(outlet)">
+        <div class="nike-image">
+          <img [src]="outlet.image" [alt]="outlet.name" loading="lazy" decoding="async" />
+          <span class="badge">{{ outlet.badge }}</span>
+          <div class="dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="nike-content">
+          <h3>{{ outlet.name }}</h3>
+          <p class="sub">{{ outlet.subtitle }}</p>
+          <div class="card-actions">
+            <button class="btn btn-select" type="button">Select</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section booking-section" id="booking">
+  <div class="container">
+    <div class="booking-shell">
+      <div class="date-hero-card" [class.has-action]="selectedLocation">
+        <div class="date-hero-overlay"></div>
+        <div class="date-hero-content">
+          <h3>Choose Your Date</h3>
+        </div>
+      </div>
+
+      <div class="booking-right">
+        <div class="booking-layout">
+          <div class="calendar-card" [class.has-action]="selectedLocation">
+            <div class="calendar-header">
+              <div>
+                <button type="button" (click)="prevMonth()">‹</button>
+                <span>{{ monthLabel }}</span>
+                <button type="button" (click)="nextMonth()">›</button>
+              </div>
+            </div>
+
+            <div class="weekdays">
+              <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+            </div>
+
+            <div class="calendar-grid">
+              <button
+                class="day"
+                *ngFor="let day of calendarDays"
+                [class.selected]="isSelected(day.date)"
+                [class.disabled]="isDisabled(day.date)"
+                (click)="selectDate(day.date)"
+              >
+                {{ day.label }}
+              </button>
+            </div>
+            <button class="confirm-now-btn" [class.show]="selectedLocation" type="button" (click)="confirmNow()">
+              <span class="btn-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm-1.2 13.2L7.6 12a1 1 0 1 1 1.4-1.4l1.8 1.8 4.2-4.2a1 1 0 0 1 1.4 1.4l-5 5a1 1 0 0 1-1.4 0Z"/>
+                </svg>
+              </span>
+              Book Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
