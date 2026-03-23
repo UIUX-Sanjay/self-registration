@@ -1,0 +1,73 @@
+<div class="page">
+  <header class="header">
+    <img [src]="logoUrl" alt="Calms Technologies" />
+    <h1>Calms Technologies</h1>
+  </header>
+
+  <section class="title">
+    <div class="accent">Visitor</div>
+    <div class="main">Registration</div>
+  </section>
+
+  <form class="form" [formGroup]="form">
+    <label class="field">
+      <span>Select Branch <span class="optional">(Optional)</span></span>
+      <div class="select-wrap branch" [class.open]="branchOpen">
+        <button class="select-btn" type="button" (click)="toggleBranch()">
+          {{ form.value.branch || 'Choose a branch...' }}
+        </button>
+        <span class="chev" aria-hidden="true">⌄</span>
+        <ul class="select-list" role="listbox">
+          <li
+            *ngFor="let branch of branches"
+            [class.active]="branch === form.value.branch"
+            (click)="selectBranch(branch)"
+            role="option"
+          >
+            {{ branch }}
+          </li>
+        </ul>
+      </div>
+    </label>
+
+    <label class="field">
+      <span>Type of visit? <span class="optional">(Optional)</span></span>
+      <div class="select-wrap visit" [class.open]="visitOpen">
+        <button class="select-btn" type="button" (click)="toggleVisit()">
+          {{ form.value.visitType || 'Choose a branch...' }}
+        </button>
+        <span class="chev" aria-hidden="true">⌄</span>
+        <ul class="select-list" role="listbox">
+          <li
+            *ngFor="let type of visitTypes"
+            [class.active]="type === form.value.visitType"
+            (click)="selectVisitType(type)"
+            role="option"
+          >
+            {{ type }}
+          </li>
+        </ul>
+      </div>
+    </label>
+
+    <div class="terms-card">
+      <div class="terms-head">
+        <h3>Terms and Condition</h3>
+        <input type="checkbox" formControlName="termsAccepted" aria-label="Accept terms" />
+      </div>
+      <p>For CALMS</p>
+      <p>
+        By submitting your information, you agree and consent to Calms
+        Technologies Sdn Bhd and its related corporations, and its managing
+        agent, collecting, using and disclosing such information for the
+        purposes of seeking clarification on the information submitted or
+        contacting you in the event of any emergencies and related purposes.
+      </p>
+      <p class="small">123calms</p>
+    </div>
+
+    <button class="continue" type="button" [disabled]="!form.value.termsAccepted">
+      Continue <span class="arrow">→</span>
+    </button>
+  </form>
+</div>
