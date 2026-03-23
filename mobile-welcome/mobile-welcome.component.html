@@ -1,0 +1,28 @@
+<div class="mobile-shell">
+  <section class="hero">
+    <img class="hero-image" [src]="heroImageUrl" alt="Welcome" />
+    <button class="lang-btn" type="button" aria-label="Language selector">文A</button>
+  </section>
+
+  <section class="logo-block">
+    <img [src]="logoUrl" alt="CALMS Technologies" />
+  </section>
+
+  <section class="content">
+    <h1>Welcome to CALMS</h1>
+    <p>Please select your branch location</p>
+
+    <form [formGroup]="form" class="form">
+      <label class="label" for="branch">Select Branch</label>
+      <div class="select-wrap">
+        <select id="branch" formControlName="branch">
+          <option value="" disabled selected>Choose a branch...</option>
+          <option *ngFor="let branch of branches" [value]="branch">
+            {{ branch }}
+          </option>
+        </select>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </div>
+    </form>
+  </section>
+</div>
