@@ -46,7 +46,7 @@
 
 .page-header h1 {
   font-size: 34px;
-  font-weight: 600;
+  font-weight: 500;
   color: #5d5d5d;
 }
 
@@ -245,4 +245,125 @@
 .icon-left,
 .icon-right {
   font-size: 18px;
+}
+
+@media (max-width: 600px) {
+  :host {
+    background: #f6f6f6;
+    background-image: none;
+    justify-content: center;
+    height: 900px;
+  }
+
+  .page {
+    max-width: 420px;
+    padding: 18px 18px 28px;
+  }
+
+  .page-header {
+    margin-bottom: 16px;
+  }
+
+  .logo {
+    width: 180px;
+  }
+
+  .page-header h1 {
+    font-size: 25px;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 42px;
+  }
+
+  .left {
+    order: 1;
+  }
+
+  .left h2 {
+    font-size: 28px;
+  }
+
+  .left p {
+    font-size: 13px;
+  }
+
+  .illustration {
+    display: none;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .right {
+    order: 2;
+    gap: 14px;
+  }
+
+  .card {
+    border-radius: 26px;
+    padding: 12px 18px;
+  }
+
+  .card .title {
+    font-size: 14px;
+  }
+
+  .card .subtitle {
+    font-size: 11px;
+  }
+
+  .card .small {
+    font-size: 11px;
+  }
+
+  .card .icon {
+    width: 34px;
+    height: 34px;
+    margin-bottom: 0;
+  }
+
+  .card-right {
+    gap: 2px;
+  }
+
+  .progress .track {
+    width: 180px;
+    height: 6px;
+  }
+
+  .card.uploading .percent {
+    font-size: 18px;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 22px;
+  }
+
+  .actions-left {
+    width: 100%;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .btn {
+    height: 46px;
+    font-size: 14px;
+    padding: 0 18px;
+  }
+
+  .actions-left .btn {
+    width: 48%;
+    justify-content: center;
+  }
+
+  .btn.yellow {
+    width: 100%;
+    justify-content: center;
+  }
 }
