@@ -2,9 +2,23 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-interface SavedVisitor {
+interface VisitorData {
   name: string;
   phone: string;
+  gender: string;
+  visit: string;
+  email: string;
+  visitDate: string;
+  identity: string;
+  singleAudf2: string;
+  idType: string;
+  multipleAudf3: string;
+  freetextAudf1: string;
+}
+
+interface SavedVisitor {
+  id: number;
+  data: VisitorData;
 }
 
 interface ToastItem {
@@ -27,14 +41,13 @@ export class VisitorInformationComponent {
   visitors: SavedVisitor[] = [];
   toasts: ToastItem[] = [];
 
-  formData = {
+  formData: VisitorData = {
     name: '',
     phone: '',
     gender: '',
     visit: '',
     email: '',
     visitDate: '',
-    visitTime: '',
     identity: '',
     singleAudf2: '',
     idType: '',
@@ -44,30 +57,21 @@ export class VisitorInformationComponent {
 
   searchModalOpen = false;
   dateModalOpen = false;
-  timeModalOpen = false;
   photoModalOpen = false;
+  savedModalOpen = false;
+  editingIndex: number | null = null;
 
   photoCaptured = false;
 
   viewDate = new Date();
   selectedDate: Date | null = null;
-  selectedTime: string | null = null;
+  endDate: Date | null = null;
+  startTime = '09:00';
+  endTime = '10:00';
+  selectingEnd = false;
+  enableAiNotes = false;
 
   readonly weekdays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-  readonly timeSlots = [
-    '08:00 AM',
-    '09:00 AM',
-    '10:00 AM',
-    '11:00 AM',
-    '12:00 PM',
-    '01:00 PM',
-    '02:00 PM',
-    '03:00 PM',
-    '04:00 PM',
-    '05:00 PM',
-    '06:00 PM',
-    '07:00 PM',
-  ];
 
   get anyFilled(): boolean {
     return Object.values(this.formData).some((value) => value.trim() !== '');
@@ -77,48 +81,84 @@ export class VisitorInformationComponent {
     return this.viewDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   }
 
-  get calendarDays(): Array<{ label: number | ''; date?: Date; isSelected?: boolean }>{
+  get startDateLabel(): string {
+    return this.selectedDate ? this.formatDate(this.selectedDate) : 'Select date';
+  }
+
+  get endDateLabel(): string {
+    return this.endDate ? this.formatDate(this.endDate) : 'Select date';
+  }
+
+  get calendarDays(): Array<{ label: number | ''; date?: Date; isSelected?: boolean; isRange?: boolean }>{
     const year = this.viewDate.getFullYear();
     const month = this.viewDate.getMonth();
     const firstDay = new Date(year, month, 1);
     const startDay = (firstDay.getDay() + 6) % 7;
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-    const days: Array<{ label: number | ''; date?: Date; isSelected?: boolean }> = [];
+    const days: Array<{ label: number | ''; date?: Date; isSelected?: boolean; isRange?: boolean }> = [];
     for (let i = 0; i < startDay; i += 1) {
       days.push({ label: '' });
     }
     for (let day = 1; day <= daysInMonth; day += 1) {
       const date = new Date(year, month, day);
-      const isSelected = !!(
-        this.selectedDate && date.toDateString() === this.selectedDate.toDateString()
-      );
-      days.push({ label: day, date, isSelected });
+      const isStart =
+        this.selectedDate && date.toDateString() === this.selectedDate.toDateString();
+      const isEnd = this.endDate && date.toDateString() === this.endDate.toDateString();
+      const isRange =
+        this.selectedDate &&
+        this.endDate &&
+        date >= this.stripTime(this.selectedDate) &&
+        date <= this.stripTime(this.endDate);
+      days.push({ label: day, date, isSelected: !!(isStart || isEnd), isRange: !!isRange });
     }
     return days;
   }
 
-  openModal(type: 'search' | 'date' | 'time' | 'photo'): void {
+  private stripTime(date: Date): Date {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  }
+
+  openModal(type: 'search' | 'date' | 'photo'): void {
     this.searchModalOpen = type === 'search';
     this.dateModalOpen = type === 'date';
-    this.timeModalOpen = type === 'time';
     this.photoModalOpen = type === 'photo';
   }
 
   closeModal(): void {
     this.searchModalOpen = false;
     this.dateModalOpen = false;
-    this.timeModalOpen = false;
     this.photoModalOpen = false;
   }
 
+  openSavedModal(): void {
+    this.savedModalOpen = true;
+  }
+
+  closeSavedModal(): void {
+    this.savedModalOpen = false;
+  }
+
   selectDate(date: Date): void {
-    this.selectedDate = date;
+    if (this.selectingEnd) {
+      this.endDate = date;
+    } else {
+      this.selectedDate = date;
+      if (!this.endDate) this.endDate = date;
+    }
+  }
+
+  setSelectingEnd(value: boolean): void {
+    this.selectingEnd = value;
   }
 
   applyDate(): void {
     if (!this.selectedDate) return;
-    this.formData.visitDate = this.formatDate(this.selectedDate);
+    const start = this.formatDate(this.selectedDate);
+    const end = this.endDate ? this.formatDate(this.endDate) : start;
+    const startTime = this.formatTimeInput(this.startTime);
+    const endTime = this.formatTimeInput(this.endTime);
+    this.formData.visitDate = `${start} - ${end}, ${startTime} - ${endTime}`;
     this.closeModal();
   }
 
@@ -130,14 +170,8 @@ export class VisitorInformationComponent {
     this.viewDate = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1, 1);
   }
 
-  selectTime(time: string): void {
-    this.selectedTime = time;
-  }
-
-  applyTime(): void {
-    if (!this.selectedTime) return;
-    this.formData.visitTime = this.selectedTime;
-    this.closeModal();
+  setEndDate(date: Date): void {
+    this.endDate = date;
   }
 
   saveAdd(): void {
@@ -146,7 +180,15 @@ export class VisitorInformationComponent {
       this.showToast('Please fill all mandatory fields.', 'error');
       return;
     }
-    this.visitors.unshift({ name: this.formData.name, phone: this.formData.phone });
+    if (this.editingIndex !== null) {
+      this.visitors[this.editingIndex] = {
+        ...this.visitors[this.editingIndex],
+        data: { ...this.formData },
+      };
+      this.editingIndex = null;
+    } else {
+      this.visitors.unshift({ id: Date.now(), data: { ...this.formData } });
+    }
     this.clearForm();
     this.showToast('Visitor saved successfully.', 'success');
   }
@@ -165,7 +207,17 @@ export class VisitorInformationComponent {
   }
 
   deleteVisitor(index: number): void {
+    const ok = window.confirm('Delete this visitor?');
+    if (!ok) return;
     this.visitors.splice(index, 1);
+  }
+
+  editVisitor(index: number): void {
+    const visitor = this.visitors[index];
+    if (!visitor) return;
+    this.formData = { ...visitor.data };
+    this.editingIndex = index;
+    this.closeSavedModal();
   }
 
   capturePhoto(): void {
@@ -192,7 +244,6 @@ export class VisitorInformationComponent {
       visit: '',
       email: '',
       visitDate: '',
-      visitTime: '',
       identity: '',
       singleAudf2: '',
       idType: '',
@@ -200,7 +251,11 @@ export class VisitorInformationComponent {
       freetextAudf1: '',
     };
     this.selectedDate = null;
-    this.selectedTime = null;
+    this.endDate = null;
+    this.startTime = '09:00';
+    this.endTime = '10:00';
+    this.selectingEnd = false;
+    this.enableAiNotes = false;
   }
 
   private formatDate(date: Date): string {
@@ -221,5 +276,14 @@ export class VisitorInformationComponent {
     setTimeout(() => {
       this.closeToast(id);
     }, 2800);
+  }
+
+  formatTimeInput(value: string): string {
+    const [h, m] = value.split(':').map((v) => Number(v));
+    if (Number.isNaN(h) || Number.isNaN(m)) return value;
+    const hours = h % 12 || 12;
+    const suffix = h >= 12 ? 'PM' : 'AM';
+    const min = String(m).padStart(2, '0');
+    return `${hours}:${min} ${suffix}`;
   }
 }

@@ -43,14 +43,24 @@
         Please provide your details Provide accurate details for screening and access clearance. All fields are required.
       </p>
     </div>
-    <button class="btn btn-outline" type="button" (click)="openModal('search')">
-      <span class="btn-icon">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M10.5 3a7.5 7.5 0 1 1 0 15a7.5 7.5 0 0 1 0-15Zm0 2a5.5 5.5 0 1 0 0 11a5.5 5.5 0 0 0 0-11Zm7.7 12.3l3.2 3.2a1 1 0 0 1-1.4 1.4l-3.2-3.2a1 1 0 0 1 1.4-1.4Z" />
-        </svg>
-      </span>
-      Returning visitor?
-    </button>
+    <div class="top-actions">
+      <button class="btn btn-outline btn-saved" *ngIf="visitors.length > 0" type="button" (click)="openSavedModal()">
+        <span class="btn-icon">
+         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+  <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1z"/>
+</svg>
+        </span>
+        <span class="count">{{ visitors.length }}</span>
+      </button>
+      <button class="btn btn-outline" type="button" (click)="openModal('search')">
+        <span class="btn-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M10.5 3a7.5 7.5 0 1 1 0 15a7.5 7.5 0 0 1 0-15Zm0 2a5.5 5.5 0 1 0 0 11a5.5 5.5 0 0 0 0-11Zm7.7 12.3l3.2 3.2a1 1 0 0 1-1.4 1.4l-3.2-3.2a1 1 0 0 1 1.4-1.4Z" />
+          </svg>
+        </span>
+        Returning visitor?
+      </button>
+    </div>
   </section>
 
   <form class="visitor-form" novalidate>
@@ -143,27 +153,6 @@
           </label>
 
           <label class="field">
-            <span class="field-label">Visit Time</span>
-            <div class="input-wrap">
-              <span class="field-icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 5v5.2l3.4 2a1 1 0 1 1-1 1.7L11 13V7a1 1 0 0 1 2 0Z" />
-                </svg>
-              </span>
-              <input
-                type="text"
-                name="visitTime"
-                placeholder="Put time"
-                readonly
-                (click)="openModal('time')"
-                (focus)="openModal('time')"
-                [(ngModel)]="formData.visitTime"
-                required
-              />
-            </div>
-          </label>
-
-          <label class="field">
             <span class="field-label">Identity Number</span>
             <div class="input-wrap">
               <span class="field-icon">
@@ -224,37 +213,7 @@
           </label>
         </div>
 
-        <section class="saved-visitors" aria-live="polite">
-          <div class="saved-card" *ngFor="let visitor of visitors; let i = index">
-            <div>
-              <h4>Save Visitor</h4>
-              <div class="saved-row">
-                <div class="saved-item">
-                  <span class="icon">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M12 12a4 4 0 1 0-4-4a4 4 0 0 0 4 4Zm0 2c-3.3 0-6 1.7-6 3.8V20h12v-2.2c0-2.1-2.7-3.8-6-3.8Z" />
-                    </svg>
-                  </span>
-                  <span>{{ visitor.name }}</span>
-                </div>
-                <div class="saved-item">
-                  <span class="icon">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M6.6 3.5h3.1a1 1 0 0 1 1 .8l.6 3.1a1 1 0 0 1-.6 1.1l-1.6.7a11.6 11.6 0 0 0 5.1 5.1l.7-1.6a1 1 0 0 1 1.1-.6l3.1.6a1 1 0 0 1 .8 1v3.1a1 1 0 0 1-1 1C10.1 19.8 4.2 13.9 3.9 4.5a1 1 0 0 1 1-1Z" />
-                    </svg>
-                  </span>
-                  <span>{{ visitor.phone }}</span>
-                </div>
-              </div>
-            </div>
-            <button class="delete-btn" type="button" (click)="deleteVisitor(i)" aria-label="Delete">
-             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-  <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
-</svg>
-
-            </button>
-          </div>
-        </section>
+        <section class="saved-visitors" aria-live="polite"></section>
       </div>
 
       <div class="form-actions">
@@ -313,52 +272,70 @@
 
 <div class="modal" [class.active]="dateModalOpen" aria-hidden="!dateModalOpen">
   <div class="modal-overlay" (click)="closeModal()"></div>
-  <div class="modal-card date-card" role="dialog" aria-modal="true" aria-labelledby="dateTitle">
+  <div class="modal-card schedule-card" role="dialog" aria-modal="true" aria-labelledby="scheduleTitle">
     <button class="modal-close" type="button" (click)="closeModal()" aria-label="Close">×</button>
-    <div class="date-header">
-      <button class="nav-btn" type="button" (click)="previousMonth()">‹</button>
-      <h3 id="dateTitle">{{ dateTitle }}</h3>
-      <button class="nav-btn" type="button" (click)="nextMonth()">›</button>
+    <div class="schedule-header">
+      <div class="schedule-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 5v5.2l3.4 2a1 1 0 1 1-1 1.7L11 13V7a1 1 0 0 1 2 0Z" />
+        </svg>
+      </div>
+      <div>
+        <h3 id="scheduleTitle">Schedule a meeting</h3>
+        <p>Create your next meeting easily.</p>
+      </div>
     </div>
-    <div class="weekday-row">
-      <span *ngFor="let day of weekdays">{{ day }}</span>
+    <div class="schedule-body">
+      <div class="schedule-calendar">
+        <div class="date-header">
+          <button class="nav-btn" type="button" (click)="previousMonth()">‹</button>
+          <h3>{{ dateTitle }}</h3>
+          <button class="nav-btn" type="button" (click)="nextMonth()">›</button>
+        </div>
+        <div class="weekday-row">
+          <span *ngFor="let day of weekdays">{{ day }}</span>
+        </div>
+        <div class="calendar-grid">
+          <button
+            type="button"
+            *ngFor="let day of calendarDays"
+            [disabled]="!day.date"
+            [class.is-selected]="day.isSelected"
+            [class.is-range]="day.isRange"
+            (click)="day.date && selectDate(day.date)"
+          >
+            {{ day.label }}
+          </button>
+        </div>
+      </div>
+      <div class="schedule-form">
+        <label>Start date*</label>
+        <div class="schedule-row">
+          <input type="text" [value]="startDateLabel" (click)="setSelectingEnd(false)" readonly />
+          <input type="time" [(ngModel)]="startTime" />
+        </div>
+        <label>End date*</label>
+        <div class="schedule-row">
+          <input type="text" [value]="endDateLabel" (click)="setSelectingEnd(true)" readonly />
+          <input type="time" [(ngModel)]="endTime" />
+        </div>
+        <div class="toggle-row">
+          <span>Enable AI notes</span>
+          <label class="switch">
+            <input type="checkbox" [(ngModel)]="enableAiNotes" />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
     </div>
-    <div class="calendar-grid">
-      <button
-        type="button"
-        *ngFor="let day of calendarDays"
-        [disabled]="!day.date"
-        [class.is-selected]="day.isSelected"
-        (click)="day.date && selectDate(day.date)"
-      >
-        {{ day.label }}
-      </button>
-    </div>
-    <div class="date-actions">
-      <button class="btn btn-back btn-light" type="button" (click)="closeModal()">Cancel</button>
-      <button class="btn btn-primary btn-light" type="button" (click)="applyDate()">Apply</button>
-    </div>
-  </div>
-</div>
-
-<div class="modal" [class.active]="timeModalOpen" aria-hidden="!timeModalOpen">
-  <div class="modal-overlay" (click)="closeModal()"></div>
-  <div class="modal-card time-card" role="dialog" aria-modal="true" aria-labelledby="timeTitle">
-    <button class="modal-close" type="button" (click)="closeModal()" aria-label="Close">×</button>
-    <h3 id="timeTitle">Select Time</h3>
-    <div class="time-grid">
-      <button
-        type="button"
-        *ngFor="let time of timeSlots"
-        [class.is-selected]="time === selectedTime"
-        (click)="selectTime(time)"
-      >
-        {{ time }}
-      </button>
-    </div>
-    <div class="date-actions">
-      <button class="btn btn-back btn-light" type="button" (click)="closeModal()">Cancel</button>
-      <button class="btn btn-primary btn-light" type="button" (click)="applyTime()">Apply</button>
+    <div class="schedule-footer">
+      <div class="event-summary">
+        Event: {{ startDateLabel }} - {{ endDateLabel }}, from {{ formatTimeInput(startTime) }} - {{ formatTimeInput(endTime) }}
+      </div>
+      <div class="footer-actions">
+        <button class="btn btn-back btn-light" type="button" (click)="closeModal()">Cancel</button>
+        <button class="btn btn-primary btn-light" type="button" (click)="applyDate()">Schedule</button>
+      </div>
     </div>
   </div>
 </div>
@@ -401,5 +378,33 @@
     </button>
     <button class="btn photo-btn secondary" type="button" (click)="retakePhoto()" *ngIf="photoCaptured">Retake</button>
     <button class="btn btn-primary photo-btn" type="button" (click)="usePhoto()" *ngIf="photoCaptured">Use This Photo</button>
+  </div>
+</div>
+
+<div class="modal saved-modal" [class.active]="savedModalOpen" aria-hidden="!savedModalOpen">
+  <div class="modal-overlay" (click)="closeSavedModal()"></div>
+  <div class="modal-card saved-card-list" role="dialog" aria-modal="true" aria-labelledby="savedTitle">
+    <button class="modal-close" type="button" (click)="closeSavedModal()" aria-label="Close">×</button>
+    <h3 id="savedTitle" class="saved-title">Save Visitor</h3>
+    <div class="saved-list">
+      <div class="saved-row-item" *ngFor="let visitor of visitors; let i = index">
+        <div class="avatar">{{ visitor.data.name?.[0] || '?' }}</div>
+        <div class="saved-name">{{ visitor.data.name || 'Visitor' }}</div>
+        <button class="icon-btn edit" type="button" (click)="editVisitor(i)" aria-label="Edit">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-pencil-square" viewBox="0 0 16 16">
+  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+</svg>
+
+        </button>
+        <button class="icon-btn delete" type="button" (click)="deleteVisitor(i)" aria-label="Delete">
+          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+  <path fill-rule="evenodd" d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z" clip-rule="evenodd"/>
+</svg>
+
+        </button>
+      </div>
+      <div class="empty" *ngIf="visitors.length === 0">No saved visitors.</div>
+    </div>
   </div>
 </div>
