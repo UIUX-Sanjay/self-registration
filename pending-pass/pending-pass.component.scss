@@ -218,6 +218,79 @@
   margin-top: 12px;
 }
 
+@media (max-width: 600px) {
+  :host {
+    background: #f6f6f6 url("/assets/back.png") no-repeat center top / cover;
+  }
+
+  .page {
+    padding: 18px 16px 26px;
+    gap: 8px;
+  }
+
+  .status-icon {
+    width: 52px;
+    height: 52px;
+            margin-top: 114px;
+  }
+
+  .status-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .title {
+    font-size: 19px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    max-width: 280px;
+  }
+
+  .pass-card {
+    width: 100%;
+    max-width: 330px;
+    border-radius: 18px;
+  }
+
+  .pass-header {
+    padding: 14px 14px 24px;
+  }
+
+  .badge {
+    top: 12px;
+    right: 12px;
+    font-size: 8px;
+    padding: 3px 7px;
+  }
+
+  .reg-block {
+    border-radius: 12px;
+  }
+
+  .wave {
+    bottom: -8px;
+    height: 16px;
+    background: radial-gradient(circle at 8px 8px, #ffffff 8px, transparent 9px) repeat-x;
+    background-size: 16px 16px;
+  }
+
+  .pass-body {
+    padding: 16px 14px 14px;
+  }
+
+  .info-grid {
+    gap: 10px 10px;
+  }
+
+  .action-btn {
+    width: 100%;
+    max-width: 330px;
+    margin-top: 10px;
+  }
+}
+
 .btn-icon {
   width: 14px;
   height: 14px;

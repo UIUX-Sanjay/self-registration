@@ -46,12 +46,12 @@
 
 .title {
   text-align: center;
-  margin-top: 6px;
+  margin-top: 65px;
 }
 
 .title h2 {
   font-size: 36px;
-  font-weight: 700;
+  font-weight: 500;
   display: inline-flex;
   gap: 8px;
 }
@@ -171,4 +171,68 @@
 .icon-left,
 .icon-right {
   font-size: 18px;
+}
+
+@media (max-width: 600px) {
+  :host {
+    background: #f6f6f6;
+    background-image: none;
+  }
+
+  .page {
+    padding: 18px 18px 28px;
+  }
+
+  .logo {
+    width: 190px;
+  }
+
+  .page-header h1 {
+    font-size: 30px;
+  }
+
+  
+
+  .title p {
+    font-size: 16px;
+  }
+
+  .video-card {
+    margin-top: 18px;
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .video-inner {
+    border-radius: 14px;
+  }
+
+  .video-thumb,
+  .video-player {
+    height: 230px;
+    border-radius: 14px;
+  }
+
+  .play-button {
+    width: 62px;
+    height: 62px;
+    border-width: 3px;
+  }
+
+  .play-triangle {
+    border-top-width: 9px;
+    border-bottom-width: 9px;
+    border-left-width: 16px;
+  }
+
+  .actions {
+    margin-top: 70px;
+    gap: 16px;
+  }
+
+  .btn {
+    height: 48px;
+    padding: 0 18px;
+    font-size: 14px;
+  }
 }

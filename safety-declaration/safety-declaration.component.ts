@@ -77,14 +77,16 @@ export class SafetyDeclarationComponent {
   }
 
   handleContinue(): void {
-    if (!this.allAnswered) {
-      this.openModal('required');
+    const hasIncorrect = this.questions.some(
+      (q) => (q.answer ?? '').toUpperCase() === 'YES'
+    );
+    if (hasIncorrect) {
+      this.openModal('incorrect');
       return;
     }
 
-    const hasIncorrect = this.questions.some((q) => q.answer === 'YES');
-    if (hasIncorrect) {
-      this.openModal('incorrect');
+    if (!this.allAnswered) {
+      this.openModal('required');
       return;
     }
   }
